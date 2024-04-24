@@ -5,7 +5,14 @@
 			{
 				"name": "STG Copy data BLOB",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "SP",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -59,6 +66,31 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "ASQL",
+				"type": "Wait",
+				"dependsOn": [
+					{
+						"activity": "STG Copy data BLOB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
+			},
+			{
+				"name": "SP",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
 			}
 		],
 		"annotations": []
