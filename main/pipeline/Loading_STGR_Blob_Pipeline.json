@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "Loading_STGR_Blob_Pipeline",
 	"properties": {
 		"activities": [
 			{
